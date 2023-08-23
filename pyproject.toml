@@ -1,0 +1,17 @@
+[tool.poetry]
+name = "riddlepot"
+version = "0.1.0"
+description = "Events, talks, workshops, conferences tracker, related to Sofware Development industry."
+authors = ["Sergio Infante <rsinfante@gmail.com>"]
+license = "MIT"
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.11"
+fastapi = "^0.101.1"
+uvicorn = "^0.23.2"
+
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
