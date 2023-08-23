@@ -8,3 +8,7 @@ class EventBase(BaseModel):
 
 class EventCreate(EventBase):
     short_description: str
+
+
+class Event(EventBase):
+    id: int

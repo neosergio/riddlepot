@@ -12,6 +12,8 @@ fastapi = "^0.101.1"
 uvicorn = "^0.23.2"
 pydantic = "^2.2.1"
 pydantic-settings = "^2.0.3"
+boto3 = "^1.28.32"
+pynamodb = "^5.5.0"
 
 
 [build-system]
