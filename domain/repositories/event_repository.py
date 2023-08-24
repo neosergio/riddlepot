@@ -4,7 +4,7 @@ from adapters.persistance.database import EventTable
 
 class EventRepository:
     def create_event(self, name: str, short_description: str, datetime: str) -> EventCreate:
-        event = EventCreate(
+        event = EventTable(
             event_id = self.generate_next_event_id(),
             name=name,
             datetime=datetime,

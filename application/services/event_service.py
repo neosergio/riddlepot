@@ -7,6 +7,9 @@ class EventService:
         self.event_repository = event_repository
 
 
-    def create_event(self, name: str, datetime: str, short_description: str) -> EventCreate:
-        event = Event(name=name, datetime=datetime, short_description=short_description)
-        return self.event_repository.create_event(event)
+    def create_event(self, event: EventCreate) -> Event:
+        name = event.name
+        datetime = event.datetime
+        short_description = event.short_description
+        event = EventCreate(name=name, datetime=datetime, short_description=short_description)
+        return self.event_repository.create_event(name=event.name, datetime=event.datetime, short_description=event.short_description)
