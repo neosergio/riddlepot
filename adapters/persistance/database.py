@@ -1,6 +1,5 @@
 import boto3
-from pynamodb.models import Model
-from pynamodb.attributes import UnicodeAttribute, NumberAttribute, ListAttribute, MapAttribute
+import json
 from config.settings import dynamodb_settings, aws_settings
 
 
@@ -12,23 +11,13 @@ dynamodb = boto3.resource(
     aws_secret_access_key=aws_settings.AWS_SECRET_ACCESS_KEY
 )
 
+class EventTable:
+    def __init__(self, item: dict):
+        self.dynamodb = dynamodb
+        self.table = self.dynamodb.Table("EventTable")
+        self.item = item
 
-class EventTable(Model):
-    class Meta:
-        table_name = "EventTable"
-        region = dynamodb_settings.DYNAMODB_REGION
-
-    event_id = NumberAttribute(hash_key=True)
-    name = UnicodeAttribute()
-    datetime = UnicodeAttribute()
-    short_description = UnicodeAttribute()
-
-# Create the DynamoDB table
-def create_tables():
-    if not EventTable.exists():
-        EventTable.create_table(wait=True)
-
-# Drop the DynamoDB table
-def drop_tables():
-    if EventTable.exists():
-        EventTable.delete_table()
+    def save(self):
+        item = json.loads(json.dumps(self.item))
+        self.table.put_item(Item=item)
+        return item
